@@ -1,0 +1,32 @@
+#!/bin/bash
+#spencer jackson
+
+#adjust brightness on MBP using Nvidia driver
+#add a line to /etc/sudoers: <user> ALL = NOPASSWD: /path/to/brightness
+
+case "$1" in
+monup)  
+    # increase screen brightness
+    echo $(expr $(cat /sys/class/backlight/acpi_video0/brightness) + 2) > /sys/class/backlight/acpi_video0/brightness
+    notify-send -i notification-display-brightness-high -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/acpi_video0/brightness) ) " " 
+    ;;
+
+mondown)
+    # decrease screen brightness
+    echo $(expr $(cat /sys/class/backlight/acpi_video0/brightness) - 2) > /sys/class/backlight/acpi_video0/brightness
+    notify-send -i notification-display-brightness-low -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/acpi_video0/brightness) ) " " 
+    ;;
+
+kbup)
+    # increase keyboard brightness
+    echo $(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) + 25) > /sys/class/leds/smc\:\:kbd_backlight/brightness
+    notify-send -i notification-keyboard-brightness-high -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) \* 100 / 255) " "
+    ;;
+
+kbdown)
+    # decrease keyboard brightness
+    echo $(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) - 25) > /sys/class/leds/smc\:\:kbd_backlight/brightness
+    notify-send -i notification-keyboard-brightness-low -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) \* 100 / 255) " "
+    ;;
+
+esac

@@ -141,19 +141,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 exec --no-startup-id nm-applet
 exec synclient ClickPad=1
 exec synclient ClickFinger3=2
-#exec xrandr --output DP-2 --rotate left #this worked with noveau drivers but not nvidia
 exec --no-startup-id /bin/bash -c "sleep 2 && xrandr --output DP-0 --right-of DP-2 --output DP-1 --rotate left --right-of DP-0"
 exec --no-startup-id unity-settings-daemon
 exec echo 700 >> /sys/class/backlight/gmux_backlight/brightness
 exec echo 70 >> /sys/class/backlight/acpi_video0/brightness
-#exec echo 25 > /sys/class/leds/smc\:\:kbd_backlight/brightness
 exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
-#exec --no-startup-id i3-msg 'workspace 2; exec evolution'
 exec --no-startup-id i3-msg 'workspace 3; exec firefox'
-#exec --no-startup-id i3-msg 'workspace 4; exec eclipse' #splash
-#exec --no-startup-id i4-msg 'workspace 6; exec spotify' # splash
 exec --no-startup-id i3-msg 'workspace 2; exec nautilus'
-#exec --no-startup-id i3-msg 'workspace 4; exec nautilus'
 
 #screenlock/blank 
 exec --no-startup-id /bin/bash -c "sleep 10 && xset dpms 601 &"
@@ -169,16 +163,12 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -3% ; exec notify-send
 bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle; exec notify-send -i notification-audio-volume-off -h string:x-canonical-private-synchronous:1 -h int:value:0 " " # mute sound
 
 # Sreen brightness controls
-#bindsym XF86MonBrightnessUp exec echo $(expr $(cat /sys/class/backlight/gmux_backlight/brightness) + 20) > /sys/class/backlight/gmux_backlight/brightness; exec notify-send -i notification-display-brightness-high -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/gmux_backlight/brightness) / 10) " " # increase screen brightness
-#bindsym XF86MonBrightnessDown exec echo $(expr $(cat /sys/class/backlight/gmux_backlight/brightness) - 20) > /sys/class/backlight/gmux_backlight/brightness; exec notify-send -i notification-display-brightness-low -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/gmux_backlight/brightness) / 10) " " # decrease screen brightness
+bindsym XF86MonBrightnessUp exec sudo ~/.bin/brightness monup
+bindsym XF86MonBrightnessDown exec sudo ~/.bin/brightness mondown
 
-#nvidia version
-bindsym XF86MonBrightnessUp exec sudo /bin/bash -c 'echo $(expr $(cat /sys/class/backlight/acpi_video0/brightness) + 2) > /sys/class/backlight/acpi_video0/brightness'; exec notify-send -i notification-display-brightness-high -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/acpi_video0/brightness) ) " " # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo /bin/bash -c 'echo $(expr $(cat /sys/class/backlight/acpi_video0/brightness) - 2) > /sys/class/backlight/acpi_video0/brightness'; exec notify-send -i notification-display-brightness-low -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/backlight/acpi_video0/brightness) ) " " # decrease screen brightness
-
-# Keyboard brightness
-bindsym XF86KbdBrightnessUp exec echo $(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) + 25) > /sys/class/leds/smc\:\:kbd_backlight/brightness; exec notify-send -i notification-keyboard-brightness-high -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) \* 100 / 255) " " # increase screen brightness
-bindsym XF86KbdBrightnessDown exec echo $(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) - 25) > /sys/class/leds/smc\:\:kbd_backlight/brightness; exec notify-send -i notification-keyboard-brightness-low -h string:x-canonical-private-synchronous:1 -h int:value:$(expr $(cat /sys/class/leds/smc\:\:kbd_backlight/brightness) \* 100 / 255) " " # decrease screen brightness
+# Keyboard brightness 
+bindsym XF86KbdBrightnessUp exec sudo ~/.bin/brightness kbup
+bindsym XF86KbdBrightnessDown exec sudo ~/.bin/brightness kbdown
 
 
 # Media player controls
