@@ -18,8 +18,8 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-#font pango:DejaVu Sans Mono 15 #CHANGE FOR HIGH DPI
-font pango:DejaVu Sans Mono 11
+font pango:DejaVu Sans Mono 15 #CHANGE FOR HIGH DPI
+#font pango:DejaVu Sans Mono 11
 #font pango:DejaVu Sans Mono 6
 
 #CHANGES FOR HIGH DPI
@@ -138,6 +138,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start various things I want
+exec xrandr --output Virtual1 --mode 2880x1800_60.00
 #exec synclient ClickPad=1
 #exec synclient ClickFinger3=2
 #exec --no-startup-id /bin/bash -c "sleep 2 && xrandr --output DP-0 --right-of DP-2 --output DP-1 --rotate left --right-of DP-0"
