@@ -137,27 +137,17 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# start various things I want
-exec xrandr --output Virtual1 --mode 2880x1800_60.00
-#exec synclient ClickPad=1
-#exec synclient ClickFinger3=2
-#exec --no-startup-id /bin/bash -c "sleep 2 && xrandr --output DP-0 --right-of DP-2 --output DP-1 --rotate left --right-of DP-0"
-#exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
-#exec --no-startup-id i3-msg 'workspace 3; exec firefox'
-#exec --no-startup-id i3-msg 'workspace 2; exec nautilus'
-
 #screenlock/blank 
 exec --no-startup-id /bin/bash -c "sleep 10 && xset dpms 601 &"
 exec xautolock -time 10 -locker i3lock
-#exec --no-startup-id /bin/bash -c 'echo XHC1 > /proc/acpi/wakeup'
 
-# Media player controls
-#bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause 
-#bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-#bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+#parallels VM doesn't seem to remember the correct resolution
+exec /bin/bash -c "~/.bin/retina_res.sh"
 
-#for some reason NVidia drivers can't remember by monitor config, so make a button to fix them
-#bindsym XF86LaunchA exec xrandr --output DP-0 --right-of DP-2 --output DP-1 --rotate left --right-of DP-0
+# start various things I want
+exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 3; exec firefox'
+exec --no-startup-id i3-msg 'workspace 2; exec nautilus'
 
 #calendar
 bindsym $mod+c exec gsimplecal
