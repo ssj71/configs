@@ -1,0 +1,3 @@
+camera="usb"
+#camera_usb_options="-r 640x480 -f 10 -d /dev/v41/by-id/usb-046d_08b1-video-index0"
+camera_usb_options="-d /dev/v4l/by-id/&usb-046d_081b_8E6A07E0-video-index1"
