@@ -1,0 +1,4 @@
+#!/bin/bash
+#ssj
+
+echo NRF52832_XXAA NRF52840_XXAA STM32F411RE Cortex-M4
